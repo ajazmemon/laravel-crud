@@ -39,9 +39,13 @@ class BlogController extends Controller
     {
         $all = $request->all();
         $all['hobby'] = implode(',', $all['hobby']);
+        if (Input::hasFile('logo')) {
         $fileName = time().'.'.request()->logo->getClientOriginalExtension();
         $request->logo->store('img');
         $all['logo'] = $fileName;
+        }
+        $all['logo'] = '';
+        
         Blog::create($all);
         return redirect('/blog');
     }
@@ -79,18 +83,14 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog,$id)
     {
+        
         $blog = Blog::find($id);
 
         $all = $request->all();
-
+        
+        $all['hobby'] = implode(',', $all['hobby']);
         if (empty($all->logo)) {
             $all['logo'] = $blog->logo;
-        }
-        if (empty($all->gender)) {
-            $all['gender'] = $blog->gender;
-        }
-        if (empty($all->hobby)) {
-            $all['hobby'] = $blog->hobby;
         }
         
         $file = Input::file('logo');
@@ -129,8 +129,10 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy(Blog $blog,$id)
     {
-        //
+        $blog = Blog::find($id);
+        $blog->delete();
+        return redirect('/blog');
     }
 }

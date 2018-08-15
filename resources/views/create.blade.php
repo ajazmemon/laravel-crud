@@ -30,27 +30,41 @@
 
     <div class="form-group">
       <label for="pwd">Getway:</label>
-      {!! Form::select('getway', array('L' => 'Large', 'S' => 'Small'),$blog->getway,['class' => 'form-control']) !!}
+      {!! Form::select('getway', array('L' => 'Large', 'S' => 'Small'),@$blog->getway,['class' => 'form-control']) !!}
     </div>
     
     <div class="form-check">
-    		
+     		<?php @$buslist = @$blog->hobby;?>
+        <br>
+
             <label class="form-check-inline">
-                <input class="form-check-input" type="checkbox" name="hobby[]" value="1" 
-                @if( in_array($blog->hobby, (array)1) ) checked="1" @endif /> football
+              @if(isset($blog))
+              {{ Form::checkbox('hobby[]', 1,  in_array(1, $buslist), array('class'=>'')) }}football
+              @else
+                {{ Form::checkbox('hobby[]', 1, null, array('class'=>'')) }}football
+                @endif
             </label><br>
             <label class="form-check-inline">
-                <input class="form-check-input" type="checkbox" name="hobby[]" value="2"  @if( in_array($blog->hobby, (array)2) ) checked="1" @endif> basketball
+              @if(isset($blog))
+              {{ Form::checkbox('hobby[]', 2, in_array(2, $buslist), array('class'=>'')) }} basketball
+              @else
+                {{ Form::checkbox('hobby[]', 2,null, array('class'=>'')) }} basketball
+                @endif
             </label><br>
             <label class="form-check-inline">
-                <input class="form-check-input" type="checkbox" name="hobby[]" value="3" @if($blog->hobby == 3) checked @endif> swimming
+              @if(isset($blog))
+              {{ Form::checkbox('hobby[]', 3, in_array(3, $buslist), array('class'=>'')) }} swimming
+              @else
+                {{ Form::checkbox('hobby[]', 3, null, array('class'=>'')) }} swimming
+                @endif
             </label><br><br>
         </div>
 
         <div class="form-group">
+          
       <label for="pwd">Gender:</label>
-    		{!! Form::radio('gender', 'male', (old('gender') ==  'male'),array('id'=>'sex')) !!}Male
-{!! Form::radio('gender', 'female', (old('gender') ==  'female'), array('id'=>'sex')) !!}  Frmale
+    		{!! Form::radio('gender', 'male',(@$blog->gender =='male'),array('id'=>'sex')) !!}Male
+{!! Form::radio('gender', 'female', (@$blog->gender =='female'), array('id'=>'sex')) !!}  Female
     	</div>
     
     <button type="submit" class="btn btn-primary">Submit</button>
