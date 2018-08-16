@@ -45,7 +45,7 @@
 
     <div class="form-group">
       <label for="pwd">Getway:</label>
-      {!! Form::select('getway', array('L' => 'Large', 'S' => 'Small'),null,['class' => 'form-control']) !!}
+      {!! Form::select('getway', array('Large' => 'Large', 'Small' => 'Small'),(@$blog->getway),['class' => 'form-control']) !!}
       @if ($errors->has('getway'))
       <div class="error" style="color: red">{{ $errors->first('getway') }}</div>
       @endif
@@ -57,23 +57,23 @@
 
             <label class="form-check-inline">
               @if(isset($blog))
-              {{ Form::checkbox('hobby[]', 1,  in_array(1, $buslist), array('class'=>'')) }}football
+              {{ Form::checkbox('hobby[]', 'football',  in_array('football', $buslist), array('class'=>'')) }}football
               @else
-                {{ Form::checkbox('hobby[]', 1, null, array('class'=>'')) }}football
+                {{ Form::checkbox('hobby[]', 'football', null, array('class'=>'')) }}football
                 @endif
             </label><br>
             <label class="form-check-inline">
               @if(isset($blog))
-              {{ Form::checkbox('hobby[]', 2, in_array(2, $buslist), array('class'=>'')) }} basketball
+              {{ Form::checkbox('hobby[]', 'basketball', in_array('basketball', $buslist), array('class'=>'')) }} basketball
               @else
-                {{ Form::checkbox('hobby[]', 2,null, array('class'=>'')) }} basketball
+                {{ Form::checkbox('hobby[]', 'basketball',null, array('class'=>'')) }} basketball
                 @endif
             </label><br>
             <label class="form-check-inline">
               @if(isset($blog))
-              {{ Form::checkbox('hobby[]', 3, in_array(3, $buslist), array('class'=>'')) }} swimming
+              {{ Form::checkbox('hobby[]', 'swimming', in_array('swimming', $buslist), array('class'=>'')) }} swimming
               @else
-                {{ Form::checkbox('hobby[]', 3, null, array('class'=>'')) }} swimming
+                {{ Form::checkbox('hobby[]', 'swimming', null, array('class'=>'')) }} swimming
                 @endif
             </label><br><br>
         </div>

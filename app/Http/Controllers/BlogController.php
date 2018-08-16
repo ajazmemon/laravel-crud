@@ -40,12 +40,16 @@ class BlogController extends Controller
     {
         $all = $request->all();
         $all['hobby'] = implode(',', $all['hobby']);
+        $file = Input::file('logo');
         if (Input::hasFile('logo')) {
-        $fileName = time().'.'.request()->logo->getClientOriginalExtension();
-        $request->logo->store('img');
-        $all['logo'] = $fileName;
+            $fileName = time().'.'.request()->logo->getClientOriginalExtension();
+            $file->move('img/', $fileName);
+            $all['logo'] = $fileName;
+        
         }
-        $all['logo'] = '';
+        if (is_null($all->logo)) {
+            $all['logo'] = '';
+        }
         
         Blog::create($all);
         return redirect('/blog');

@@ -25,7 +25,7 @@ class BlogRequest extends FormRequest
     {
         return [
             'application_name' => 'required',
-            'logo' => 'image| mimes:jpeg,jpg,png',
+            'logo' => 'required|image| mimes:jpeg,jpg,png',
             'title' => 'required',
             'address' => 'required',
             'email' => 'required|email',
@@ -38,6 +38,7 @@ class BlogRequest extends FormRequest
         return [
             'application_name.required' => 'Please Enter Application Name',           
             'logo.image' => 'Selected file must be image',        
+            'logo.required' => 'Please select file',        
             'title.required' => 'Please Enter Title',           
             'address.required' => 'Please Enter Address',
             'email.required' => 'Please Enter Email',

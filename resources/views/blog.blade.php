@@ -4,36 +4,16 @@
 	<table class="table table-responsive">
 		<thead>
 			<tr>
-				<th>
-					Id
-				</th>
-				<th>
-					Name
-				</th>
-				<th>
-					Title
-				</th>
-				<th>
-					Address
-				</th>
-				<th>
-					Email
-				</th>
-				<th>
-					Logo
-				</th>
-				<th>
-					Getway
-				</th>
-				<th>
-					Hobby
-				</th>
-				<th>
-					Gender
-				</th>
-				<th>
-					Action
-				</th>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Title</th>
+				<th>Address</th>
+				<th>Email</th>
+				<th>Logo</th>
+				<th>Getway</th>
+				<th>Hobby</th>
+				<th>Gender</th>
+				<th style="text-align: center;">Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -44,11 +24,11 @@
 					<td><?=$b->title?></td>
 					<td><?=$b->address?></td>
 					<td><?=$b->email?></td>
-					<td><img src= "{{asset('storage/app/img', $b->logo) }}" alt="Card image cap"></td>
+					<td><img src= {{ asset('img/'.$b->logo) }} alt="Card image cap" height="50px;" width="30px;"></td>
 					<td><?=$b->getway?></td>
 					<td><?=$b->hobby?></td>
 					<td><?=$b->gender?></td>
-					<td><a href="{{route('edit',$b->id)}}"><span class="btn btn-primary">Edit  </span></a> | <a  data-id="{{$b->id}}" class="delete_row"><span class="btn btn-danger">Delete</span></td>
+					<td style="text-align: center;"><a href="{{route('edit',$b->id)}}"><span class="btn btn-primary">Edit  </span></a> | <a  data-id="{{$b->id}}" class="delete_row"><span class="btn btn-danger">Delete</span></td>
 			</tr>
 			@endforeach
 		</tbody>
